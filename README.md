@@ -6,7 +6,9 @@ It depends on a MySQL Server to work and allows to configure those server connec
 
 # Running the container
 
-$ docker run -d -t freeradius -p 1812/udp:1812/sdp -p 1813/udp:1813/udp -e DB_HOST=mysql.server 2stacks/freeradius
+```
+docker run -d -t freeradius -p 1812/udp:1812/sdp -p 1813/udp:1813/udp -e DB_HOST=mysql.server 2stacks/freeradius
+```
 
 # Environment Variables
 
