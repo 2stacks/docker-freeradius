@@ -252,8 +252,8 @@ listen {
 #  Make *sure* that 'preprocess' comes before any realm if you
 #  need to setup hints for the remote radius server
 authorize {
-        # Mask Source IP in calling_station_id
-        mask_calling_station_id
+        # Mask Source IP in Calling-Station-Id and NAS-IP-Address
+        mask_accounting_data
 
 	#
 	#  Take a User-Name, and perform some checks on it, for spaces and other
@@ -518,8 +518,8 @@ authenticate {
 #  Pre-accounting.  Decide which accounting type to use.
 #
 preacct {
-        # Mask Source IP in calling_station_id
-        mask_calling_station_id
+        # Mask Source IP in Calling-Station-Id and NAS-IP-Address
+        mask_accounting_data
 
 	preprocess
 

@@ -95,10 +95,11 @@ rewrite_calling_station_id {
 	}
 }
 
-mask_calling_station_id {
+mask_accounting_data {
         if (&Calling-Station-Id) {
                 update request {
                         &Calling-Station-Id := "1.1.1.1"
+                        &NAS-IP-Address := "1.1.1.1"
                 }
                 updated
         }
