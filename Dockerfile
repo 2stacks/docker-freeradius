@@ -2,7 +2,7 @@ FROM alpine
 
 MAINTAINER 2stacks <2stacks@2stacks.net>
 
-RUN apk --update add freeradius freeradius-mysql bash
+RUN apk --update add freeradius freeradius-mysql freeradius-eap bash
 
 ADD ./etc/raddb/ /etc/raddb
 
