@@ -15,6 +15,7 @@ ENV DB_PASS=radpass
 ENV DB_NAME=radius
 ENV RADIUS_KEY=testing123
 ENV RAD_CLIENTS=10.0.0.0/22
+ENV RAD_DEBUG=no
 
 ADD ./wait-for-it/wait-for-it.sh /usr/local/bin/wait-for-it.sh
 RUN chmod +x /usr/local/bin/wait-for-it.sh

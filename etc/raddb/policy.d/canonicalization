@@ -96,6 +96,7 @@ rewrite_calling_station_id {
 }
 
 mask_accounting_data {
+  if ( $ENV{RAD_DEBUG} == "no" ) {
         if (&Calling-Station-Id) {
                 update request {
                         &Calling-Station-Id := "1.1.1.1"
@@ -106,4 +107,5 @@ mask_accounting_data {
         else {
                 noop
         }
+  }
 }

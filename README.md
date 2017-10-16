@@ -18,6 +18,7 @@ docker run -d -t freeradius -p 1812/udp:1812/sdp -p 1813/udp:1813/udp -e DB_HOST
 - DB_PASS=radpass
 - DB_NAME=radius
 - RADIUS_KEY=testing123
+- RAD_DEBUG=no
 
 # Docker Compose Example
 
@@ -43,6 +44,7 @@ freeradius:
       #- DB_PORT=3306
       #- RADIUS_KEY=testing123
       #- RAD_CLIENTS=10.0.0.0/22
+      - RAD_DEBUG=yes
     depends_on:
       - mysql
     links:
