@@ -706,7 +706,10 @@ post-auth {
 	#
 	#  See "Authentication Logging Queries" in mods-available/sql
 	#-sql
-	sql
+
+        if ( $ENV{RAD_DEBUG} == "yes" ) {
+	  sql
+        }
 
 	#
 	#  Instead of sending the query to the SQL server,
@@ -812,7 +815,11 @@ post-auth {
 	Post-Auth-Type REJECT {
 		# log failed authentications in SQL, too.
 		#-sql
-		sql
+
+                if ( $ENV{RAD_DEBUG} == "yes" ) {
+	          sql
+                }
+
 		attr_filter.access_reject
 
 		# Insert EAP-Failure message if the request was
