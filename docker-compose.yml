@@ -1,8 +1,9 @@
 version: '3.2'
 
 services:
-freeradius:
-    image: "2stacks/freeradius:latest"
+
+  freeradius:
+    image: "2stacks/docker-freeradius"
     #ports:
       #- "1812:1812/udp"
       #- "1813:1813/udp"
@@ -27,8 +28,8 @@ freeradius:
       - backend
 
   mysql:
-    image: mysql
-    command: mysqld --server-id=1
+    image: "mysql:5.7.22"
+    command: mysqld
     ports:
       - "3306:3306"
     volumes:
