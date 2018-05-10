@@ -2,7 +2,13 @@
 
 FreerRADIUS Server.
 
-It depends on a MySQL Server to work and allows to configure those server connections via environment variables. See below. 
+It depends on a MySQL Server to work and allows to configure those server connections via environment variables. See below.
+
+# Build the container
+
+```
+docker build --pull -t 2stacks/docker-freeradius
+```
 
 # Running the container
 
@@ -12,13 +18,13 @@ docker run -d -t freeradius -p 1812/udp:1812/sdp -p 1813/udp:1813/udp -e DB_HOST
 
 # Environment Variables
 
-- DB_HOST=localhost
-- DB_PORT=3306
-- DB_USER=radius
-- DB_PASS=radpass
-- DB_NAME=radius
-- RADIUS_KEY=testing123
-- RAD_DEBUG=no
+-   DB_HOST=localhost
+-   DB_PORT=3306
+-   DB_USER=radius
+-   DB_PASS=radpass
+-   DB_NAME=radius
+-   RADIUS_KEY=testing123
+-   RAD_DEBUG=no
 
 # Docker Compose Example
 
@@ -28,8 +34,8 @@ Next an example of a docker-compose.yml file:
 version: '3.2'
 
 services:
-freeradius:
-    image: "2stacks/freeradius:latest"
+  freeradius:
+    image: "2stacks/docker-freeradius"
     #ports:
       #- "1812:1812/udp"
       #- "1813:1813/udp"
@@ -54,8 +60,8 @@ freeradius:
       - backend
 
   mysql:
-    image: mysql
-    command: mysqld --server-id=1
+    image: "mysql:5.7.22"
+    command: mysqld
     ports:
       - "3306:3306"
     volumes:
