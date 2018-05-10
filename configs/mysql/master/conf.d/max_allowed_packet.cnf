@@ -1,2 +1,2 @@
-[mysqld] 
+[mysqld]
 max_allowed_packet=256M
