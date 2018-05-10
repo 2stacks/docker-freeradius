@@ -7,13 +7,13 @@ It depends on a MySQL Server to work and allows you to configure the server conn
 # Build the container
 
 ```shell
-docker build --pull -t 2stacks/docker-freeradius
+docker build --pull -t 2stacks/freeradius
 ```
 
 # Running the container
 
 ```shell
-docker run -d -t freeradius -p 1812/udp:1812/sdp -p 1813/udp:1813/udp -e DB_HOST=mysql.server 2stacks/docker-freeradius
+docker run -d -t freeradius -p 1812/udp:1812/sdp -p 1813/udp:1813/udp -e DB_HOST=mysql.server 2stacks/freeradius
 ```
 
 # Environment Variables
@@ -35,7 +35,7 @@ version: '3.2'
 
 services:
   freeradius:
-    image: "2stacks/docker-freeradius"
+    image: "2stacks/freeradius"
     #ports:
       #- "1812:1812/udp"
       #- "1813:1813/udp"
@@ -100,10 +100,10 @@ File: configs/mysql/master/conf.d/sql_mode.cnf
 [mysqld]
 sql_mode = STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
 ```
-Note: The mysql docker image, associated schema, volumes and configs are not a part of the docker-freeradius image that can be pulled from docker hub.  See .dockerignore file for the parts of this repository that are excluded from the image.
+Note: The mysql docker image, associated schema, volumes and configs are not a part of the 2stacks/freeradius image that can be pulled from docker hub.  See .dockerignore file for the parts of this repository that are excluded from the image.
 
 # Testing Authentication
-The docker-freeradius container can be tested against the mysql backend created in the above compose file using a separate container running the radtest client.
+The freeradius container can be tested against the mysql backend created in the above compose file using a separate container running the radtest client.
 
 ```shell
 docker run -it --rm --network=dockerfreeradius_backend 2stacks/radtest radtest testing password freeradius 0 testing123
@@ -118,7 +118,7 @@ Sent Access-Request Id 42 from 0.0.0.0:48898 to 10.0.0.3:1812 length 77
 Received Access-Accept Id 42 from 10.0.0.3:1812 to 0.0.0.0:0 length 20
 ```
 
-Note: The username and password used in the radtest example above are pre-loaded in the mysql database by the radius.sql schema included in this repository.  The preconfigured mysql database is for validating docker-freeradius functionality only and not intended for production use.
+Note: The username and password used in the radtest example above are pre-loaded in the mysql database by the radius.sql schema included in this repository.  The preconfigured mysql database is for validating freeradius functionality only and not intended for production use.
 
 A default SQL scheme for FreeRadius on MySQL can be found [here](https://raw.githubusercontent.com/FreeRADIUS/freeradius-server/v3.0.x/raddb/mods-config/sql/main/mysql/schema.sql).
 

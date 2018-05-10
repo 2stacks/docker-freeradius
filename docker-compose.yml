@@ -3,7 +3,7 @@ version: '3.2'
 services:
 
   freeradius:
-    image: "2stacks/docker-freeradius"
+    image: "2stacks/freeradius"
     #ports:
       #- "1812:1812/udp"
       #- "1813:1813/udp"
