@@ -1,0 +1,51 @@
+version: '3.2'
+
+services:
+freeradius:
+    image: "2stacks/freeradius:latest"
+    #ports:
+      #- "1812:1812/udp"
+      #- "1813:1813/udp"
+    #volumes:
+      #- "./configs/radius/users:/etc/raddb/users"
+      #- "./configs/radius/clients.conf:/etc/raddb/clients.conf"
+    environment:
+      #- DB_NAME=radius
+      - DB_HOST=mysql
+      #- DB_USER=radius
+      #- DB_PASS=radpass
+      #- DB_PORT=3306
+      #- RADIUS_KEY=testing123
+      #- RAD_CLIENTS=10.0.0.0/22
+      - RAD_DEBUG=yes
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    restart: always
+    networks:
+      - backend
+
+  mysql:
+    image: mysql
+    command: mysqld --server-id=1
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./configs/mysql/master/data:/var/lib/mysql"
+      - "./configs/mysql/master/conf.d:/etc/mysql/conf.d"
+      - "./configs/mysql/radius.sql:/docker-entrypoint-initdb.d/radius.sql"
+    environment:
+      - MYSQL_ROOT_PASSWORD=radius
+      - MYSQL_USER=radius
+      - MYSQL_PASSWORD=radpass
+      - MYSQL_DATABASE=radius
+    restart: always
+    networks:
+      - backend
+
+networks:
+  backend:
+    ipam:
+      config:
+        - subnet: 10.0.0.0/24
