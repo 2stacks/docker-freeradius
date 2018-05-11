@@ -4,6 +4,9 @@ FreeRADIUS Server.
 
 It depends on a MySQL Server to work and allows you to configure the server connections via environment variables.
 
+## Supported tags
+-   1.1, latest
+
 # Build the container
 
 ```shell
