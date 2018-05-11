@@ -2,6 +2,18 @@ FROM alpine
 
 MAINTAINER 2stacks <2stacks@2stacks.net>
 
+# Use docker build --pull --build-arg BUILD_DATE='date' -t 2stacks/freeradius .
+ARG BUILD_DATE
+
+# Image details
+LABEL net.2stacks.build-date="$BUILD_DATE" \
+      net.2stacks.name="2stacks" \
+      net.2stacks.license="MIT" \
+      net.2stacks.description="Dockerfile for autobuilds" \
+      net.2stacks.url="http://www.2stacks.net" \
+      net.2stacks.vcs-type="Git" \
+      net.2stacks.version="1.0"
+
 RUN apk --update add freeradius freeradius-mysql freeradius-eap bash
 
 ADD ./etc/raddb/ /etc/raddb
