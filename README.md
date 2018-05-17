@@ -14,9 +14,15 @@ docker build --pull -t 2stacks/freeradius
 ```
 
 # Running the container
-
+With MySQL
 ```shell
-docker run -d -t freeradius -p 1812/udp:1812/sdp -p 1813/udp:1813/udp -e DB_HOST=mysql.server 2stacks/freeradius
+docker run -d -t freeradius -p 1812/udp:1812/udp -p 1813/udp:1813/udp -e DB_HOST=<mysql.server> 2stacks/freeradius
+```
+
+Without MySQL
+```shell
+docker run -d -t freeradius -p 1812/udp:1812/udp -p 1813/udp:1813/udp -e DB_HOST=<mysql.server> \
+-v /$PWD/configs/radius/users:/etc/raddb/users 2stacks/freeradius
 ```
 
 # Environment Variables
@@ -27,6 +33,7 @@ docker run -d -t freeradius -p 1812/udp:1812/sdp -p 1813/udp:1813/udp -e DB_HOST
 -   DB_PASS=radpass
 -   DB_NAME=radius
 -   RADIUS_KEY=testing123
+-   RAD_CLIENTS=10.0.0.0/22
 -   RAD_DEBUG=no
 
 # Docker Compose Example
@@ -44,7 +51,6 @@ services:
       #- "1813:1813/udp"
     #volumes:
       #- "./configs/radius/users:/etc/raddb/users"
-      #- "./configs/radius/clients.conf:/etc/raddb/clients.conf"
     environment:
       #- DB_NAME=radius
       - DB_HOST=mysql
