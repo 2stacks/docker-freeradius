@@ -5,7 +5,12 @@ FreeRADIUS Server.
 It depends on a MySQL Server to work and allows you to configure the server connections via environment variables.
 
 ## Supported tags
--   1.1, latest
+| Tag | Alpine Version | FreeRADIUS Version | Description | Release Date |
+| --- | :---: | :---: | --- | :---: |
+| [latest, 1.2](https://github.com/2stacks/docker-freeradius/blob/master/Dockerfile) | 3.8 | 3.0.17-r2 | Latest stable release | 2018-12-23 |
+| [1.1](https://github.com/2stacks/docker-freeradius/blob/1.1/Dockerfile) | 3.6 | 3 | Initial stable release | 2018-05-11 | 
+| [1.0](https://github.com/2stacks/docker-freeradius/blob/1.0/Dockerfile) | 3.6 | 3 | Initial stable release | 2017-10-16 | 
+
 
 # Build the container
 
@@ -33,7 +38,7 @@ docker run -d -t freeradius -p 1812/udp:1812/udp -p 1813/udp:1813/udp \
 -   DB_PASS=radpass
 -   DB_NAME=radius
 -   RADIUS_KEY=testing123
--   RAD_CLIENTS=10.0.0.0/22
+-   RAD_CLIENTS=10.0.0.0/24
 -   RAD_DEBUG=no
 
 # Docker Compose Example
@@ -58,7 +63,7 @@ services:
       #- DB_PASS=radpass
       #- DB_PORT=3306
       #- RADIUS_KEY=testing123
-      #- RAD_CLIENTS=10.0.0.0/22
+      #- RAD_CLIENTS=10.0.0.0/24
       - RAD_DEBUG=yes
     depends_on:
       - mysql
@@ -69,7 +74,7 @@ services:
       - backend
 
   mysql:
-    image: "mysql:5.7.22"
+    image: "mysql:5.7"
     command: mysqld
     ports:
       - "3306:3306"
@@ -83,6 +88,15 @@ services:
       - MYSQL_PASSWORD=radpass
       - MYSQL_DATABASE=radius
     restart: always
+    networks:
+      - backend
+        
+    radtest:
+    image: "2stacks/radtest"
+    command: radtest testing password freeradius 0 testing123
+    depends_on:
+      - freeradius
+      - mysql
     networks:
       - backend
 
