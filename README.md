@@ -7,9 +7,9 @@ It depends on a MySQL Server to work and allows you to configure the server conn
 ## Supported tags
 | Tag | Alpine Version | FreeRADIUS Version | Description | Release Date |
 | --- | :---: | :---: | --- | :---: |
-| [latest, 1.2](https://github.com/2stacks/docker-freeradius/blob/master/Dockerfile) | 3.8 | 3.0.17-r2 | Latest stable release | 2018-12-23 |
-| [1.1](https://github.com/2stacks/docker-freeradius/blob/1.1/Dockerfile) | 3.6 | 3 | Initial stable release | 2018-05-11 | 
-| [1.0](https://github.com/2stacks/docker-freeradius/blob/1.0/Dockerfile) | 3.6 | 3 | Initial stable release | 2017-10-16 | 
+| [1.2, latest](https://github.com/2stacks/docker-freeradius/blob/master/Dockerfile) | 3.8.2 | 3.0.17-r2 | Latest stable release | 2018-12-23 |
+| [1.1](https://github.com/2stacks/docker-freeradius/blob/1.1/Dockerfile) | 3.8.0 | 3.0.17 | Initial stable release | 2018-05-11 | 
+| [1.0](https://github.com/2stacks/docker-freeradius/blob/1.0/Dockerfile) | 3.7 | 3.0.15-r3 | Initial release | 2017-10-16 | 
 
 
 # Build the container
@@ -21,12 +21,12 @@ docker build --pull -t 2stacks/freeradius
 # Running the container
 -   With MySQL
 ```shell
-docker run -d -t freeradius -p 1812/udp:1812/udp -p 1813/udp:1813/udp -e DB_HOST=<mysql.server> 2stacks/freeradius
+docker run -d -t --name freeradius -p 1812:1812/udp -p 1813:1813/udp -e DB_HOST=<mysql.server> 2stacks/freeradius
 ```
 
 -   Without MySQL
 ```shell
-docker run -d -t freeradius -p 1812/udp:1812/udp -p 1813/udp:1813/udp \
+docker run -d -t --name freeradius -p 1812:1812/udp -p 1813:1813/udp \
 -v /$PWD/configs/radius/users:/etc/raddb/users 2stacks/freeradius
 ```
 
