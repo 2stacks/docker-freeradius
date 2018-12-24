@@ -17,7 +17,7 @@ services:
       #- DB_PASS=radpass
       #- DB_PORT=3306
       #- RADIUS_KEY=testing123
-      #- RAD_CLIENTS=10.0.0.0/22
+      #- RAD_CLIENTS=10.0.0.0/24
       - RAD_DEBUG=yes
     depends_on:
       - mysql
@@ -28,7 +28,7 @@ services:
       - backend
 
   mysql:
-    image: "mysql:5.7.22"
+    image: "mysql:5.7"
     command: mysqld
     ports:
       - "3306:3306"
@@ -42,6 +42,15 @@ services:
       - MYSQL_PASSWORD=radpass
       - MYSQL_DATABASE=radius
     restart: always
+    networks:
+      - backend
+
+  radtest:
+    image: "2stacks/radtest"
+    command: radtest testing password freeradius 0 testing123
+    depends_on:
+      - freeradius
+      - mysql
     networks:
       - backend
 
