@@ -30,8 +30,8 @@ services:
   mysql:
     image: "mysql:5.7"
     command: mysqld
-    ports:
-      - "3306:3306"
+    #ports:
+    #  - "3306:3306"
     volumes:
       - "./configs/mysql/master/data:/var/lib/mysql"
       - "./configs/mysql/master/conf.d:/etc/mysql/conf.d"

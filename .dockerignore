@@ -1,5 +1,7 @@
 .dockerignore
 .git*
+.idea
+.travis.yml
 docs/_config.yml
 docker-compose.yml
 configs

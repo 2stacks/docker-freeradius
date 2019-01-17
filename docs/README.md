@@ -11,6 +11,7 @@ It depends on a MySQL Server to work and allows you to configure the server conn
 | [1.1](https://github.com/2stacks/docker-freeradius/blob/1.1/Dockerfile) | 3.8.0 | 3.0.17 | Initial stable release | 2018-05-11 | 
 | [1.0](https://github.com/2stacks/docker-freeradius/blob/1.0/Dockerfile) | 3.7 | 3.0.15-r3 | Initial release | 2017-10-16 | 
 
+![Travis-CI](https://travis-ci.org/2stacks/docker-freeradius.svg?branch=master)
 
 # Build the container
 
