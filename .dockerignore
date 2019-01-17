@@ -1,5 +1,5 @@
 .dockerignore
 .git*
-_config.yml
+docs/_config.yml
 docker-compose.yml
 configs
