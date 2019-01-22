@@ -4,14 +4,18 @@ FreeRADIUS Server.
 
 It depends on a MySQL Server to work and allows you to configure the server connections via environment variables.
 
+[![Build Status](https://travis-ci.org/2stacks/docker-freeradius.svg?branch=master)](https://travis-ci.org/2stacks/docker-freeradius)
+[![Docker Stars](https://img.shields.io/docker/stars/2stacks/freeradius.svg?style=popout-square)](https://hub.docker.com/r/2stacks/freeradius)
+[![Docker Pulls](https://img.shields.io/docker/pulls/2stacks/freeradius.svg?style=popout-square)](https://hub.docker.com/r/2stacks/freeradius)
+[![Build Details](https://images.microbadger.com/badges/image/2stacks/freeradius.svg)](https://microbadger.com/images/2stacks/freeradius)
+
 ## Supported tags
 | Tag | Alpine Version | FreeRADIUS Version | Description | Release Date |
 | --- | :---: | :---: | --- | :---: |
-| [1.2, latest](https://github.com/2stacks/docker-freeradius/blob/master/Dockerfile) | 3.8.2 | 3.0.17-r2 | Latest stable release | 2019-1-17 |
+| [1.2, latest](https://github.com/2stacks/docker-freeradius/blob/master/Dockerfile) | 3.8.2 | 3.0.17-r2 | Latest stable release | 2019-01-22 |
 | [1.1](https://github.com/2stacks/docker-freeradius/blob/1.1/Dockerfile) | 3.8.0 | 3.0.17 | Initial stable release | 2018-05-11 | 
 | [1.0](https://github.com/2stacks/docker-freeradius/blob/1.0/Dockerfile) | 3.7 | 3.0.15-r3 | Initial release | 2017-10-16 | 
 
-[![Build Status](https://travis-ci.org/2stacks/docker-freeradius.svg?branch=master)](https://travis-ci.org/2stacks/docker-freeradius) [![](https://images.microbadger.com/badges/image/2stacks/freeradius.svg)](https://microbadger.com/images/2stacks/freeradius "Get your own image badge on microbadger.com")
 
 # Build the container
 
