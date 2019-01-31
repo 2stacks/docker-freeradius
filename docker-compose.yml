@@ -45,15 +45,6 @@ services:
     networks:
       - backend
 
-  radtest:
-    image: "2stacks/radtest"
-    command: radtest testing password freeradius 0 testing123
-    depends_on:
-      - freeradius
-      - mysql
-    networks:
-      - backend
-
 networks:
   backend:
     ipam:

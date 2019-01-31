@@ -24,7 +24,9 @@ before_script:
   - docker inspect "$image"
 
 script:
-  - docker-compose up --exit-code-from radtest
+  - docker-compose up -d
+  - docker pull 2stacks/radtest
+  - docker run -it --rm --network docker-freeradius_backend 2stacks/radtest radtest testing password freeradius 0 testing123
 
 notifications:
   email:

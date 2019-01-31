@@ -32,8 +32,7 @@ docker run -d -t --name freeradius -p 1812:1812/udp -p 1813:1813/udp -e DB_HOST=
 
 -   Without MySQL
 ```shell
-docker run -d -t --name freeradius -p 1812:1812/udp -p 1813:1813/udp \
--v /$PWD/configs/radius/users:/etc/raddb/users 2stacks/freeradius
+docker run -d -t --name freeradius -p 1812:1812/udp -p 1813:1813/udp -v /$PWD/configs/radius/users:/etc/raddb/users 2stacks/freeradius
 ```
 
 # Environment Variables
@@ -96,15 +95,6 @@ services:
     restart: always
     networks:
       - backend
-        
-    radtest:
-    image: "2stacks/radtest"
-    command: radtest testing password freeradius 0 testing123
-    depends_on:
-      - freeradius
-      - mysql
-    networks:
-      - backend
 
 networks:
   backend:
@@ -135,7 +125,7 @@ Note: The mysql docker image, associated schema, volumes and configs are not a p
 The freeradius container can be tested against the mysql backend created in the above compose file using a separate container running the radtest client.
 
 ```shell
-docker run -it --rm --network=dockerfreeradius_backend 2stacks/radtest radtest testing password freeradius 0 testing123
+docker run -it --rm --network docker-freeradius_backend 2stacks/radtest radtest testing password freeradius 0 testing123
 
 Sent Access-Request Id 42 from 0.0.0.0:48898 to 10.0.0.3:1812 length 77
         User-Name = "testing"
