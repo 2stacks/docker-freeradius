@@ -12,10 +12,10 @@ It depends on a MySQL Server to work and allows you to configure the server conn
 ## Supported tags
 | Tag | Alpine Version | FreeRADIUS Version | Release Date |
 | --- | :---: | :---: | :---: |
-| [1.3, latest](https://github.com/2stacks/docker-freeradius/blob/master/Dockerfile) | 3.9.0 | 3.0.17-r4 | 2019-01-31 |
+| [1.4, latest](https://github.com/2stacks/docker-freeradius/blob/master/Dockerfile) | 3.9.0 | 3.0.17-r4 | 2019-03-07 |
+| [1.3](https://github.com/2stacks/docker-freeradius/blob/1.3/Dockerfile) | 3.9.0 | 3.0.17-r4 | 2019-01-31 |
 | [1.2](https://github.com/2stacks/docker-freeradius/blob/1.2/Dockerfile) | 3.8.2 | 3.0.17-r2 | 2019-01-22 |
 | [1.1](https://github.com/2stacks/docker-freeradius/blob/1.1/Dockerfile) | 3.8.0 | 3.0.17 | 2018-05-11 | 
-| [1.0](https://github.com/2stacks/docker-freeradius/blob/1.0/Dockerfile) | 3.7 | 3.0.15-r3 | 2017-10-16 | 
 
 
 # Build the container
