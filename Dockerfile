@@ -10,10 +10,10 @@ LABEL net.2stacks.name="2stacks" \
       net.2stacks.description="Dockerfile for autobuilds" \
       net.2stacks.url="http://www.2stacks.net" \
       net.2stacks.vcs-type="Git" \
-      net.2stacks.version="1.2" \
+      net.2stacks.version="1.4" \
       net.2stacks.radius.version="3.0.17-r2"
 
-RUN apk --update add freeradius freeradius-mysql freeradius-eap bash
+RUN apk --update add freeradius freeradius-mysql freeradius-eap
 
 EXPOSE 1812/udp 1813/udp
 
@@ -28,9 +28,8 @@ ENV RAD_DEBUG=no
 
 ADD --chown=root:radius ./etc/raddb/ /etc/raddb
 
-ADD ./wait-for-it/wait-for-it.sh /usr/local/bin/wait-for-it.sh
 ADD ./start.sh /start.sh
 
-RUN chmod +x /usr/local/bin/wait-for-it.sh /start.sh
+RUN chmod +x /start.sh
 
 CMD ["/start.sh"]
