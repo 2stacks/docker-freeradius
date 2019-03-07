@@ -28,7 +28,7 @@ ENV RAD_DEBUG=no
 
 ADD --chown=root:radius ./etc/raddb/ /etc/raddb
 
-ADD ./start.sh /start.sh
+ADD ./scripts/start.sh /start.sh
 
 RUN chmod +x /start.sh
 

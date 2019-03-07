@@ -1,7 +1,6 @@
 version: '3.2'
 
 services:
-
   freeradius:
     image: "2stacks/freeradius"
     #ports:
@@ -9,7 +8,6 @@ services:
       #- "1813:1813/udp"
     #volumes:
       #- "./configs/radius/users:/etc/raddb/users"
-      #- "./configs/radius/clients.conf:/etc/raddb/clients.conf"
     environment:
       #- DB_NAME=radius
       - DB_HOST=mysql
@@ -31,7 +29,7 @@ services:
     image: "mysql:5.7"
     command: mysqld
     #ports:
-    #  - "3306:3306"
+      #- "3306:3306"
     volumes:
       - "./configs/mysql/master/data:/var/lib/mysql"
       - "./configs/mysql/master/conf.d:/etc/mysql/conf.d"

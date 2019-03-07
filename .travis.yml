@@ -14,7 +14,7 @@ before_install:
   - docker-compose --version
 
 install:
-  - docker build --pull -t 2stacks/freeradius .
+  - docker build --pull --no-cache -t 2stacks/freeradius .
 
 # Assist with ci test debugging:
 #  - DEBUG=1
@@ -23,10 +23,7 @@ before_script:
   - image="2stacks/freeradius"
   - docker inspect "$image"
 
-script:
-  - docker-compose up -d
-  - docker pull 2stacks/radtest
-  - docker run -it --rm --network docker-freeradius_backend 2stacks/radtest radtest testing password freeradius 0 testing123
+script: ./scripts/run-tests.sh
 
 notifications:
   email:
