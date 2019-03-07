@@ -21,13 +21,18 @@
 #	That way, each server has the same set of information, and
 #	can make the same decision about the user.
 #
-#	$Id: 3c38550b891847a29f717df082ba3075f3461bab $
+#	$Id: ea3909830f6f453bb6dcda0f24570a331cab0216 $
 #
 ######################################################################
 
 server copy-acct-to-home-server {
 	listen {
 		type = detail
+
+		#
+		#  See sites-available/buffered-sql for more details on
+		#  all the options available for the detail reader.
+		#
 
 		######################################################
 		#
@@ -63,6 +68,7 @@ server copy-acct-to-home-server {
 		#  one large file.  File globbing also means that with
 		#  a common naming scheme for detail files, then you can
 		#  have many detail file writers, and only one reader.
+		#
 		filename = ${radacctdir}/detail
 
 		#

@@ -1,3 +1,12 @@
 *~
 .idea
+*.pem
+*.der
+*.csr
+*.crt
+*.key
+*.p12
+serial*
+index.txt*
 configs/mysql/master/data
+/dump/

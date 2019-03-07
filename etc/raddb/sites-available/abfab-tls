@@ -1,7 +1,7 @@
 #
 #	Example configuration for ABFAB listening on TLS.
 #
-#	$Id: 79d74e6fcbb12b1226f026383b8e1043092dd6fb $
+#	$Id: 5dbe143da6f170505fa1b0e1c4282ebe60b139bb $
 #
 listen {
 	ipaddr = *
@@ -24,7 +24,8 @@ listen {
 		cache {
 			enable = no
 			lifetime = 24 # hours
-			max_entries = 255
+			name = "abfab-tls"
+#			persist_dir = ${logdir}/abfab-tls
 		}
 
 		require_client_cert = yes

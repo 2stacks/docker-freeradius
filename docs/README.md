@@ -21,7 +21,7 @@ It depends on a MySQL Server to work and allows you to configure the server conn
 # Build the container
 
 ```shell
-docker build --pull -t 2stacks/freeradius
+docker build --pull -t 2stacks/freeradius .
 ```
 
 # Running the container
@@ -139,7 +139,7 @@ Received Access-Accept Id 42 from 10.0.0.3:1812 to 0.0.0.0:0 length 20
 
 Note: The username and password used in the radtest example above are pre-loaded in the mysql database by the radius.sql schema included in this repository.  The preconfigured mysql database is for validating freeradius functionality only and not intended for production use.
 
-A default SQL scheme for FreeRadius on MySQL can be found [here](https://raw.githubusercontent.com/FreeRADIUS/freeradius-server/v3.0.x/raddb/mods-config/sql/main/mysql/schema.sql).
+A default SQL scheme for FreeRadius on MySQL can be found [here](https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/mods-config/sql/main/mysql/schema.sql).
 
 # To Do
 This image is known not to work with mysql version 8.x due to a change in the [Preferred Authentication Plugin](https://dev.mysql.com/doc/refman/8.0/en/caching-sha2-pluggable-authentication.html) from previous versions.

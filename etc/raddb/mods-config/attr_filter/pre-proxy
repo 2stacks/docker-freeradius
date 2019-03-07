@@ -2,7 +2,7 @@
 #	Configuration file for the rlm_attr_filter module.
 #	Please see rlm_attr_filter(5) manpage for more information.
 #
-#	$Id: 8c601cf205f9d85b75c1ec7fc8e816e7341a5ba4 $
+#	$Id: 47b01266f44d0475261c6ea16f74ca17d8838749 $
 #
 #	This file contains security and configuration information
 #	for each realm. It can be used be an rlm_attr_filter module
@@ -33,7 +33,7 @@
 #nochap
 #	User-Name =* ANY,
 #	User-Password =* ANY,
-#	NAS-Ip-Address =* ANY,
+#	NAS-IP-Address =* ANY,
 #	NAS-Identifier =* ANY
 
 # The entry for the 'brokenas' realm removes the attribute NAS-Port-Type
@@ -59,4 +59,7 @@ DEFAULT
 	State =* ANY,
 	NAS-IP-Address =* ANY,
 	NAS-Identifier =* ANY,
+	Operator-Name =* ANY,
+	Calling-Station-Id =* ANY,
+	Chargeable-User-Identity =* ANY,
 	Proxy-State =* ANY

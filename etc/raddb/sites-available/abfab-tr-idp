@@ -7,7 +7,7 @@
 #	This file does not include a TLS listener; see abfab-tls for a simple
 #	example of a RADSEC listener for ABFAB.
 #
-#	$Id: 16820e1a243b6414da20d109887d1e3a49f32589 $
+#	$Id: e0224864ec1d81405f57a6d872f86c8a7958fdab $
 #
 
 server abfab-idp {
@@ -52,6 +52,19 @@ authenticate {
 #  Once we KNOW that the user has been authenticated, there are
 #  additional steps we can take.
 post-auth {
+	#
+	#  For EAP-TTLS and PEAP, add the cached attributes to the reply.
+	#  The "session-state" attributes are automatically cached when
+	#  an Access-Challenge is sent, and automatically retrieved
+	#  when an Access-Request is received.
+	#
+	#  The session-state attributes are automatically deleted after
+	#  an Access-Reject or Access-Accept is sent.
+	#
+	update {
+		&reply: += &session-state:
+	}
+
 	#  Create the CUI value and add the attribute to Access-Accept.
 	#  Uncomment the line below if *returning* the CUI.
 #	cui
@@ -66,12 +79,6 @@ post-auth {
 	#
 	#  See "Authentication Logging Queries" in sql.conf
 	-sql
-
-	#
-	#  Instead of sending the query to the SQL server,
-	#  write it into a log file.
-	#
-#	sql_log
 
 	#
 	#  Un-comment the following if you want to modify the user's object
@@ -99,9 +106,9 @@ post-auth {
 		# authentication failure And already has an EAP message
 		# For non-ABFAB, we insert the failure all the time, but for ABFAB
 		# It's more desirable to preserve reply-message when we can
-if &reply:Eap-Message {
+		if (&reply:Eap-Message) {
 			eap
-			}
+		}
 
 		#  Remove reply message if the response contains an EAP-Message
 		remove_reply_message_if_eap
@@ -170,4 +177,4 @@ post-proxy {
 	#
 	eap
 }
-
+}

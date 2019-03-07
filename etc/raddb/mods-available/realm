@@ -1,6 +1,6 @@
 # -*- text -*-
 #
-#  $Id: b4c8ee3d8534ece75f6129d4853e6bc081cf0aa5 $
+#  $Id: 36825e0fe77cb515219ba7febc37192988ed9fba $
 
 # Realm module, for proxying.
 #
@@ -33,6 +33,7 @@ realm suffix {
 	# for a trust-router.  For all other realms,
 	# they are ignored.
 #	trust_router = "localhost"
+#	tr_port = 12309
 #	rp_realm = "painless-security.com"
 #	default_community = "apc.moonshot.ja.net"
 }

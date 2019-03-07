@@ -1,6 +1,6 @@
 # -*- text -*-
 #
-#  $Id: 4673fa7f9fd1d9931fcf1e4e1cdd9bb656b1d434 $
+#  $Id: 3220393f94cb7a58244fee4d358d2d7bef861fea $
 
 # Microsoft CHAP authentication
 #
@@ -55,6 +55,12 @@ mschap {
 	# attribute, and do prefix/suffix checks in order to obtain
 	# the "best" user name for the request.
 	#
+	#  Depending on the AD / Samba configuration, you may also need to add:
+	#
+	#	--allow-mschapv2
+	#
+	#  to the list of command-line options.
+	#
 #	ntlm_auth = "/path/to/ntlm_auth --request-nt-key --username=%{%{Stripped-User-Name}:-%{%{User-Name}:-None}} --challenge=%{%{mschap:Challenge}:-00} --nt-response=%{%{mschap:NT-Response}:-00}"
 
 	# The default is to wait 10 seconds for ntlm_auth to
@@ -77,6 +83,15 @@ mschap {
 	#
 #	winbind_username = "%{mschap:User-Name}"
 #	winbind_domain = "%{mschap:NT-Domain}"
+
+	# When using single sign-on with a winbind connection and the
+	# client uses a different casing for the username than the
+	# casing is according to the backend, reauth may fail because
+	# of some Windows internals. This switch tries to find the
+	# user in the correct casing in the backend, and retry
+	# authentication with that username.
+	#
+#	winbind_retry_with_normalised_username = no
 
 	#
 	#  Information for the winbind connection pool.  The configuration

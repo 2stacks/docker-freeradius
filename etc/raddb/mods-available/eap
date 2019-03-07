@@ -2,7 +2,7 @@
 ##
 ##  eap.conf -- Configuration for EAP types (PEAP, TTLS, etc.)
 ##
-##	$Id: 8759784d1e1a7b071395c05e64b9aa7a293d6104 $
+##	$Id: f67cbdbff9b6560cec9f68da1adb82b59723d2ef $
 
 #######################################################################
 #
@@ -10,9 +10,6 @@
 #  is smart enough to figure this out on its own.  The most
 #  common side effect of setting 'Auth-Type := EAP' is that the
 #  users then cannot use ANY other authentication method.
-#
-#  EAP types NOT listed here may be supported via the "eap2" module.
-#  See experimental.conf for documentation.
 #
 eap {
 	#  Invoke the default supported EAP type when
@@ -200,6 +197,15 @@ eap {
 		#
 		ca_file = ${cadir}/ca.pem
 
+	 	#  OpenSSL will automatically create certificate chains,
+	 	#  unless we tell it to not do that.  The problem is that
+	 	#  it sometimes gets the chains right from a certificate
+	 	#  signature view, but wrong from the clients view.
+		#
+		#  When setting "auto_chain = no", the server certificate
+		#  file MUST include the full certificate chain.
+	#	auto_chain = yes
+
 		#
 		#  If OpenSSL supports TLS-PSK, then we can use
 		#  a PSK identity and (hex) password.  When the
@@ -228,7 +234,7 @@ eap {
 		#  For DH cipher suites to work, you have to
 		#  run OpenSSL to create the DH file first:
 		#
-		#  	openssl dhparam -out certs/dh 1024
+		#  	openssl dhparam -out certs/dh 2048
 		#
 		dh_file = ${certdir}/dh
 
@@ -264,6 +270,7 @@ eap {
 		#
 	#	include_length = yes
 
+
 		#  Check the Certificate Revocation List
 		#
 		#  1) Copy CA certificates and CRLs to same directory.
@@ -278,6 +285,10 @@ eap {
 
 		ca_path = ${cadir}
 
+		# Accept an expired Certificate Revocation List
+		#
+#		allow_expired_crl = no
+
 		#
 		#  If check_cert_issuer is set, the value will
 		#  be checked against the DN of the issuer in
@@ -285,10 +296,10 @@ eap {
 		#  match, the certificate verification will fail,
 		#  rejecting the user.
 		#
-		#  In 2.1.10 and later, this check can be done
-		#  more generally by checking the value of the
-		#  TLS-Client-Cert-Issuer attribute.  This check
-		#  can be done via any mechanism you choose.
+		#  This check can be done more generally by checking
+		#  the value of the TLS-Client-Cert-Issuer attribute.
+		#  This check can be done via any mechanism you
+		#  choose.
 		#
 	#	check_cert_issuer = "/C=GB/ST=Berkshire/L=Newbury/O=My Company Ltd"
 
@@ -313,9 +324,47 @@ eap {
 		# Set this option to specify the allowed
 		# TLS cipher suites.  The format is listed
 		# in "man 1 ciphers".
+		#
+		# For EAP-FAST, use "ALL:!EXPORT:!eNULL:!SSLv2"
+		#
 		cipher_list = "DEFAULT"
 
+		# If enabled, OpenSSL will use server cipher list
+		# (possibly defined by cipher_list option above)
+		# for choosing right cipher suite rather than
+		# using client-specified list which is OpenSSl default
+		# behavior. Having it set to yes is a current best practice
+		# for TLS
+		cipher_server_preference = no
+
 		#
+		#  You can selectively disable TLS versions for
+		#  compatability with old client devices.
+		#
+		#  If your system has OpenSSL 1.1.0 or greater, do NOT
+		#  use these.  Instead, set tls_min_version and
+		#  tls_max_version.
+		#
+#		disable_tlsv1_2 = no
+#		disable_tlsv1_1 = no
+#		disable_tlsv1 = no
+
+		#
+		#  Set min / max TLS version.  Mainly for Debian
+		#  "trusty", which disables older versions of TLS, and
+		#  requires the application to manually enable them.
+		#
+		#  If you are running Debian trusty, you should set
+		#  these options, otherwise older clients will not be
+		#  able to connect.
+		#
+		#  Allowed values are "1.0", "1.1", and "1.2".
+		#
+		#  The values must be in quotes.
+		#
+#		tls_min_version = "1.0"
+#		tls_max_version = "1.2"
+
 
 		#
 		#  Elliptical cryptography configuration
@@ -355,6 +404,12 @@ eap {
 			#  Enable it.  The default is "no". Deleting the entire "cache"
 			#  subsection also disables caching.
 			#
+			#  As of version 3.0.14, the session cache requires the use
+			#  of the "name" and "persist_dir" configuration items, below.
+			#
+			#  The internal OpenSSL session cache has been permanently
+			#  disabled.
+			#
 			#  You can disallow resumption for a particular user by adding the
 			#  following attribute to the control item list:
 			#
@@ -363,17 +418,7 @@ eap {
 			#  If "enable = no" below, you CANNOT enable resumption for just one
 			#  user by setting the above attribute to "yes".
 			#
-			enable = yes
-
-			#
-			#  Internal "name" of the session cache. Used to distinguish which
-			#  TLS context sessions belong to.
-			#
-			#  The server will generate a random value if unset. This will change
-			#  across server restart so you MUST set the "name" if you want to
-			#  persist sessions (see below).
-			#
-		#	name = "EAP module"
+			enable = no
 
 			#
 			#  Lifetime of the cached entries, in hours. The sessions will be
@@ -382,23 +427,13 @@ eap {
 			lifetime = 24 # hours
 
 			#
-			#  The maximum number of entries in the
-			#  cache.  Set to "0" for "infinite".
+			#  Internal "name" of the session cache. Used to
+			#  distinguish which TLS context sessions belong to.
 			#
-			#  This could be set to the number of users
-			#  who are logged in... which can be a LOT.
-			#
-			max_entries = 255
-
-			#
-			#  Internal "name" of the session cache.
-			#  Used to distinguish which TLS context
-			#  sessions belong to.
-			#
-			#  The server will generate a random value
-			#  if unset. This will change across server
-			#  restart so you MUST set the "name" if you
-			#  want to persist sessions (see below).
+			#  The server will generate a random value if unset.
+			#  This will change across server restart so you MUST
+			#  set the "name" if you want to persist sessions (see
+			#  below).
 			#
 			#name = "EAP module"
 
@@ -407,6 +442,11 @@ eap {
 			#  Two files per session will be written, the SSL
 			#  state and the cached VPs. This will persist session
 			#  across server restarts.
+			#
+			#  The default directory is ${logdir}, for historical
+			#  reasons.  You should ${db_dir} instead.  And check
+			#  the value of db_dir in the main radiusd.conf file.
+			#  It should not point to ${raddb}
 			#
 			#  The server will need write perms, and the directory
 			#  should be secured from anyone else. You might want
@@ -428,7 +468,21 @@ eap {
 		#  default configuration.  Uncomment it, and configure
 		#  the correct paths below to enable it.
 		#
+		#  If OCSP checking is enabled, and the OCSP checks fail,
+		#  the verify section is not run.
+		#
+		#  If OCSP checking is disabled, the verify section is
+		#  run on successful certificate validation.
+		#
 		verify {
+			#  If the OCSP checks succeed, the verify section
+			#  is run to allow additional checks.
+			#
+			#  If you want to skip verify on OCSP success,
+			#  uncomment this configuration item, and set it
+			#  to "yes".
+	#		skip_if_ocsp_ok = no
+
 			#  A temporary directory where the client
 			#  certificates are stored.  This directory
 			#  MUST be owned by the UID of the server,
@@ -641,6 +695,10 @@ eap {
 		#
 		# in the control items for a request.
 		#
+		# Note that the majority of supplicants do not support using a
+		# client certificate with EAP-TTLS, so this option is unlikely
+		# to be usable for most people.
+		#
 	#	require_client_cert = yes
 	}
 
@@ -767,6 +825,10 @@ eap {
 		#
 		# in the control items for a request.
 		#
+		# Note that the majority of supplicants do not support using a
+		# client certificate with PEAP, so this option is unlikely to
+		# be usable for most people.
+		#
 	#	require_client_cert = yes
 	}
 
@@ -809,4 +871,56 @@ eap {
 		#  identify it.
 #		identity = "FreeRADIUS"
 	}
+
+	## EAP-FAST
+	#
+	#  The FAST module implements the EAP-FAST protocol
+	#
+#	fast {
+		# Point to the common TLS configuration
+		#
+#		tls = tls-common
+
+		#
+		#  If 'cipher_list' is set here, it will over-ride the
+		#  'cipher_list' configuration from the 'tls-common'
+		#  configuration.  The EAP-FAST module has it's own
+		#  over-ride for 'cipher_list' because the
+		#  specifications mandata a different set of ciphers
+		#  than are used by the other EAP methods.
+		#
+		#  cipher_list though must include "ADH" for anonymous provisioning.
+		#  This is not as straight forward as appending "ADH" alongside
+		#  "DEFAULT" as "DEFAULT" contains "!aNULL" so instead it is
+		#  recommended "ALL:!EXPORT:!eNULL:!SSLv2" is used
+		#
+		#  Note - for OpenSSL 1.1.0 and above you may need
+		#  to add ":@SECLEVEL=0"
+		#
+#		cipher_list = "ALL:!EXPORT:!eNULL:!SSLv2"
+
+		# PAC lifetime in seconds (default: seven days)
+		#
+#		pac_lifetime = 604800
+
+		# Authority ID of the server
+		#
+		# if you are running a cluster of RADIUS servers, you should make
+		# the value chosen here (and for "pac_opaque_key") the same on all
+		# your RADIUS servers.  This value should be unique to your
+		# installation.  We suggest using a domain name.
+		#
+#		authority_identity = "1234"
+
+		# PAC Opaque encryption key (must be exactly 32 bytes in size)
+		#
+		# This value MUST be secret, and MUST be generated using
+		# a secure method, such as via 'openssl rand -hex 32'
+		#
+#		pac_opaque_key = "0123456789abcdef0123456789ABCDEF"
+
+		# Same as for TTLS, PEAP, etc.
+		#
+#		virtual_server = inner-tunnel
+#	}
 }

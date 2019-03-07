@@ -1,5 +1,5 @@
 ###########################################################################
-# $Id: c5185bee856646733a6bd9b341109cde0688b8f1 $                 #
+# $Id: 1059b115282ea738353fe4fbc8d92b03a338f8c1 $                 #
 #                                                                         #
 #  schema.sql                       rlm_sql - FreeRADIUS SQL Module       #
 #                                                                         #
@@ -19,7 +19,6 @@ CREATE TABLE radacct (
   acctsessionid varchar(64) NOT NULL default '',
   acctuniqueid varchar(32) NOT NULL default '',
   username varchar(64) NOT NULL default '',
-  groupname varchar(64) NOT NULL default '',
   realm varchar(64) default '',
   nasipaddress varchar(15) NOT NULL default '',
   nasportid varchar(15) default NULL,
@@ -128,7 +127,7 @@ CREATE TABLE radpostauth (
   username varchar(64) NOT NULL default '',
   pass varchar(64) NOT NULL default '',
   reply varchar(32) NOT NULL default '',
-  authdate timestamp NOT NULL,
+  authdate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY  (id)
 ) ENGINE = INNODB;
 

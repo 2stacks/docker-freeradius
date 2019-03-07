@@ -15,7 +15,7 @@
 #	This file is NOT meant to be used as-is.  It needs to be
 #	edited to match your local configuration.
 #
-#	$Id: a440e77b8f4da0be1911d53dc64ec62517788d87 $
+#	$Id: 6b1b5b337216e433498c1fdb85ced8a53b34df94 $
 #
 ######################################################################
 
@@ -118,12 +118,6 @@ accounting {
 	#
 	#  See "Accounting queries" in sql.conf
 #	sql
-
-	#
-	#  Instead of sending the query to the SQL server,
-	#  write it into a log file.
-	#
-#	sql_log
 
 	#  Cisco VoIP specific bulk accounting
 #	pgsql-voip
