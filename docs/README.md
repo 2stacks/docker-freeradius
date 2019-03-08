@@ -13,8 +13,8 @@ It depends on a MySQL Server to work and allows you to configure the server conn
 | Tag | Alpine Version | FreeRADIUS Version | Release Date |
 | --- | :---: | :---: | :---: |
 | [1.4, latest](https://github.com/2stacks/docker-freeradius/blob/master/Dockerfile) | 3.9.0 | 3.0.17-r4 | 2019-03-07 |
-| [1.3](https://github.com/2stacks/docker-freeradius/blob/1.3/Dockerfile) | 3.9.0 | 3.0.17-r4 | 2019-01-31 |
-| [1.2](https://github.com/2stacks/docker-freeradius/blob/1.2/Dockerfile) | 3.8.2 | 3.0.17-r2 | 2019-01-22 |
+| [1.3](https://github.com/2stacks/docker-freeradius/blob/v1.3/Dockerfile) | 3.9.0 | 3.0.17-r4 | 2019-01-31 |
+| [1.2](https://github.com/2stacks/docker-freeradius/blob/v1.2/Dockerfile) | 3.8.2 | 3.0.17-r2 | 2019-01-22 |
 | [1.1](https://github.com/2stacks/docker-freeradius/blob/1.1/Dockerfile) | 3.8.0 | 3.0.17 | 2018-05-11 | 
 
 
@@ -61,6 +61,7 @@ services:
       #- "1813:1813/udp"
     #volumes:
       #- "./configs/radius/users:/etc/raddb/users"
+      #- "./configs/radius/clients.conf:/etc/raddb/clients.conf"
     environment:
       #- DB_NAME=radius
       - DB_HOST=mysql

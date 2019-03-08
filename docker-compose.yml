@@ -8,6 +8,7 @@ services:
       #- "1813:1813/udp"
     #volumes:
       #- "./configs/radius/users:/etc/raddb/users"
+      #- "./configs/radius/clients.conf:/etc/raddb/clients.conf"
     environment:
       #- DB_NAME=radius
       - DB_HOST=mysql
