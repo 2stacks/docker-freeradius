@@ -131,9 +131,9 @@ authorize {
 	#  for the many packets that go back and forth to set up TTLS
 	#  or PEAP.  The load on those servers will therefore be reduced.
 	#
-#	eap {
-#		ok = return
-#	}
+	eap {
+		ok = return
+	}
 
 	#
 	#  Read the 'users' file
@@ -247,7 +247,7 @@ authenticate {
 
 	#
 	#  Allow EAP authentication.
-#	eap
+	eap
 }
 
 ######################################################################
@@ -427,7 +427,7 @@ post-proxy {
 	#  hidden inside of the EAP packet, and the end server will
 	#  reject the EAP request.
 	#
-#	eap
+	eap
 }
 
 } # inner-tunnel server block
