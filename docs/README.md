@@ -109,18 +109,7 @@ This compose file can be used from within this code repository by executing;
 docker-compose -f docker-compose.yml up -d
 ```
 
-Note: This example binds freeradius with a mysql database. Take note of this repository's conf.d volume, as it contains specific configurations for mysql:
-
-File: configs/mysql/master/conf.d/max_allowed_packet.cnf
-```
-max_allowed_packet=256M
-```
-File: configs/mysql/master/conf.d/sql_mode.cnf
-```
-[mysqld]
-sql_mode = STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
-```
-Note: The mysql docker image, associated schema, volumes and configs are not a part of the 2stacks/freeradius image that can be pulled from docker hub.  See .dockerignore file for the parts of this repository that are excluded from the image.
+Note: The example above binds freeradius with a mysql database.  The mysql docker image, associated schema, volumes and configs are not a part of the 2stacks/freeradius image that can be pulled from docker hub.  See .dockerignore file for the parts of this repository that are excluded from the image.
 
 # Testing Authentication
 The freeradius container can be tested against the mysql backend created in the above compose file using a separate container running the radtest client.
@@ -147,7 +136,8 @@ The container has a set of test certificates that are generated each time the co
 These certificates are not meant to be used in production and should be recreated/replaced as needed.  Follow the steps below to generate new certificates.  It is important that you read and understand the instructions in '/etc/raddb/certs/README'
   
 #### Generate new certs
-From you docker host machine
+From your docker host machine
+
   - Clone the git repository
 ```bash
 $ git clone https://github.com/2stacks/docker-freeradius.git
@@ -173,6 +163,3 @@ You'll have to change the permissions to your local user before rebuilding the c
 ```bash
 $ sudo chown -R $USER:$USER etc/raddb/certs
 ```
-
-# To Do
-This image is known not to work with mysql version 8.x due to a change in the [Preferred Authentication Plugin](https://dev.mysql.com/doc/refman/8.0/en/caching-sha2-pluggable-authentication.html) from previous versions.
