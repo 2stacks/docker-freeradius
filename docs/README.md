@@ -12,10 +12,10 @@ It depends on a MySQL Server to work and allows you to configure the server conn
 ## Supported tags
 | Tag | Alpine Version | FreeRADIUS Version | Release Date | Changes |
 | --- | :---: | :---: | :---: | :---: |
-| [1.4.1, latest](https://github.com/2stacks/docker-freeradius/blob/master/Dockerfile) | 3.9.2 | 3.0.17-r4 | 2019-03-19 | [Changelog](https://github.com/2stacks/docker-freeradius/compare/v1.4...master) |
+| [1.4.2, latest](https://github.com/2stacks/docker-freeradius/blob/master/Dockerfile) | 3.9.3 | 3.0.17-r4 | 2019-04-12 | [Changelog](https://github.com/2stacks/docker-freeradius/compare/v1.4.1...master) |
+| [1.4.1](https://github.com/2stacks/docker-freeradius/blob/v1.4.1/Dockerfile) | 3.9.2 | 3.0.17-r4 | 2019-03-19 | [Changelog](https://github.com/2stacks/docker-freeradius/compare/v1.4...v1.4.1)
 | [1.4](https://github.com/2stacks/docker-freeradius/blob/v1.4/Dockerfile) | 3.9.0 | 3.0.17-r4 | 2019-03-07 | [Changelog](https://github.com/2stacks/docker-freeradius/compare/v1.3...v1.4) |
 | [1.3](https://github.com/2stacks/docker-freeradius/blob/v1.3/Dockerfile) | 3.9.0 | 3.0.17-r4 | 2019-01-31 | [Changelog](https://github.com/2stacks/docker-freeradius/compare/v1.2...v1.3) |
-| [1.2](https://github.com/2stacks/docker-freeradius/blob/v1.2/Dockerfile) | 3.8.2 | 3.0.17-r2 | 2019-01-22 | [Changelog](https://github.com/2stacks/docker-freeradius/compare/1.1...v1.2) |
 
 
 # Build the container
@@ -129,10 +129,10 @@ Received Access-Accept Id 42 from 10.0.0.3:1812 to 0.0.0.0:0 length 20
 
 Note: The username and password used in the radtest example above are pre-loaded in the mysql database by the radius.sql schema included in this repository.  The preconfigured mysql database is for validating freeradius functionality only and not intended for production use.
 
-A default SQL scheme for FreeRadius on MySQL can be found [here](https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/mods-config/sql/main/mysql/schema.sql).
+A default SQL schema for FreeRadius on MySQL can be found [here](https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/mods-config/sql/main/mysql/schema.sql).
 
 # Certificates
-The container has a set of test certificates that are generated each time the container is built using the included Dockerfile.  These certificates are configured with the default settings from the Freeradius package and are set to expire after six months.
+The container has a set of test certificates that are generated each time the container is built using the included Dockerfile.  These certificates are configured with the default settings from the Freeradius package and are set to expire after sixty days.
 These certificates are not meant to be used in production and should be recreated/replaced as needed.  Follow the steps below to generate new certificates.  It is important that you read and understand the instructions in '/etc/raddb/certs/README'
   
 #### Generate new certs

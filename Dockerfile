@@ -10,8 +10,8 @@ LABEL net.2stacks.name="2stacks" \
       net.2stacks.description="Dockerfile for autobuilds" \
       net.2stacks.url="http://www.2stacks.net" \
       net.2stacks.vcs-type="Git" \
-      net.2stacks.version="1.4.1" \
-      net.2stacks.radius.version="3.0.17-r2"
+      net.2stacks.version="1.4.2" \
+      net.2stacks.radius.version="3.0.17-r4"
 
 RUN apk --update add freeradius freeradius-mysql freeradius-eap openssl
 
