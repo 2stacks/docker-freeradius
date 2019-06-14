@@ -12,11 +12,10 @@ It depends on a MySQL Server to work and allows you to configure the server conn
 ## Supported tags
 | Tag | Alpine Version | FreeRADIUS Version | Release Date | Changes |
 | --- | :---: | :---: | :---: | :---: |
-| [1.4.2, latest](https://github.com/2stacks/docker-freeradius/blob/master/Dockerfile) | 3.9.3 | 3.0.17-r4 | 2019-04-12 | [Changelog](https://github.com/2stacks/docker-freeradius/compare/v1.4.1...master) |
+| [1.4.3, latest](https://github.com/2stacks/docker-freeradius/blob/master/Dockerfile) | 3.9.4 | 3.0.17-r5 | 2019-06-14 | [Changelog](https://github.com/2stacks/docker-freeradius/compare/v1.4.2...master) |
+| [1.4.2](https://github.com/2stacks/docker-freeradius/blob/master/Dockerfile) | 3.9.3 | 3.0.17-r4 | 2019-04-12 | [Changelog](https://github.com/2stacks/docker-freeradius/compare/v1.4.1...v1.4.2) |
 | [1.4.1](https://github.com/2stacks/docker-freeradius/blob/v1.4.1/Dockerfile) | 3.9.2 | 3.0.17-r4 | 2019-03-19 | [Changelog](https://github.com/2stacks/docker-freeradius/compare/v1.4...v1.4.1)
 | [1.4](https://github.com/2stacks/docker-freeradius/blob/v1.4/Dockerfile) | 3.9.0 | 3.0.17-r4 | 2019-03-07 | [Changelog](https://github.com/2stacks/docker-freeradius/compare/v1.3...v1.4) |
-| [1.3](https://github.com/2stacks/docker-freeradius/blob/v1.3/Dockerfile) | 3.9.0 | 3.0.17-r4 | 2019-01-31 | [Changelog](https://github.com/2stacks/docker-freeradius/compare/v1.2...v1.3) |
-
 
 # Build the container
 
@@ -56,9 +55,9 @@ version: '3.2'
 services:
   freeradius:
     image: "2stacks/freeradius"
-    #ports:
-      #- "1812:1812/udp"
-      #- "1813:1813/udp"
+    ports:
+      - "1812:1812/udp"
+      - "1813:1813/udp"
     #volumes:
       #- "./configs/radius/users:/etc/raddb/users"
       #- "./configs/radius/clients.conf:/etc/raddb/clients.conf"
@@ -82,8 +81,8 @@ services:
   mysql:
     image: "mysql"
     command: --default-authentication-plugin=mysql_native_password
-    #ports:
-      #- "3306:3306"
+    ports:
+      - "3306:3306"
     volumes:
       - "./configs/mysql/master/data:/var/lib/mysql"
       #- "./configs/mysql/master/conf.d:/etc/mysql/conf.d"
