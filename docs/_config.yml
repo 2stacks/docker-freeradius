@@ -1,1 +1,9 @@
-theme: jekyll-theme-slate
+layout: single
+remote_theme: mmistakes/minimal-mistakes
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jemoji
+  - jekyll-include-cache
