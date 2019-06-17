@@ -17,21 +17,10 @@ It depends on a MySQL Server to work and allows you to configure the server conn
 | [1.4.1](https://github.com/2stacks/docker-freeradius/blob/v1.4.1/Dockerfile) | 3.9.2 | 3.0.17-r4 | 2019-03-19 | [Changelog](https://github.com/2stacks/docker-freeradius/compare/v1.4...v1.4.1)
 | [1.4](https://github.com/2stacks/docker-freeradius/blob/v1.4/Dockerfile) | 3.9.0 | 3.0.17-r4 | 2019-03-07 | [Changelog](https://github.com/2stacks/docker-freeradius/compare/v1.3...v1.4) |
 
-# Build the container
-
-```bash
-$ docker build --pull -t 2stacks/freeradius .
-```
-
 # Running the container
 -   With MySQL
 ```bash
 $ docker run -d -t --name freeradius -p 1812:1812/udp -p 1813:1813/udp -e DB_HOST=<mysql.server> 2stacks/freeradius
-```
-
--   Without MySQL
-```bash
-$ docker run -d -t --name freeradius -p 1812:1812/udp -p 1813:1813/udp -v /$PWD/configs/radius/users:/etc/raddb/users 2stacks/freeradius
 ```
 
 # Environment Variables
@@ -47,7 +36,7 @@ $ docker run -d -t --name freeradius -p 1812:1812/udp -p 1813:1813/udp -v /$PWD/
 
 # Docker Compose Example
 
-Next an example of a docker-compose.yml file:
+You can use the included docker-compose.yml file to test Freeradius and MySQL integration:
 
 ```yaml
 version: '3.2'
@@ -129,6 +118,23 @@ Received Access-Accept Id 42 from 10.0.0.3:1812 to 0.0.0.0:0 length 20
 Note: The username and password used in the radtest example above are pre-loaded in the mysql database by the radius.sql schema included in this repository.  The preconfigured mysql database is for validating freeradius functionality only and not intended for production use.
 
 A default SQL schema for FreeRadius on MySQL can be found [here](https://github.com/FreeRADIUS/freeradius-server/blob/master/raddb/mods-config/sql/main/mysql/schema.sql).
+
+# Build the container
+If you would like to make modifications or customizations, clone this repository, make your changes and then run the following from the root of the repository.
+
+```bash
+$ docker build --pull -t <docker_hub_account>/freeradius .
+```
+
+Note: Some users have reported broken symlinks when building the container.  Check that you have the default servers enabled via symlinks in the repository's `./etc/raddb/sites-enabled` directory.  If there are no symlinks in this directory you can create them with;
+
+```bash
+cd docker-freeradius/etc/raddb/sites-enabled
+ln -s ../sites-available/default default
+ln -s ../sites-available/inner-tunnel inner-tunnel
+``` 
+
+See [this thread](https://github.com/2stacks/docker-freeradius/issues/3) for additional information.
 
 # Certificates
 The container has a set of test certificates that are generated each time the container is built using the included Dockerfile.  These certificates are configured with the default settings from the Freeradius package and are set to expire after sixty days.
