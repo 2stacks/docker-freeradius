@@ -1,8 +1,6 @@
-# Description
+# FreeRADIUS Docker Container
 
-FreeRADIUS Server.
-
-It depends on a MySQL Server to work and allows you to configure the server connections via environment variables.
+This repository builds a FreeRADIUS Docker container using Alpine Linux.  It requires a MySQL database and can be configured with environment variables.
 
 [![Build Status](https://travis-ci.org/2stacks/docker-freeradius.svg?branch=master)](https://travis-ci.org/2stacks/docker-freeradius)
 [![Docker Stars](https://img.shields.io/docker/stars/2stacks/freeradius.svg?style=popout-square)](https://hub.docker.com/r/2stacks/freeradius)
