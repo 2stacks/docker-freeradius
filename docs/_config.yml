@@ -1,9 +1,7 @@
-layout: single
 remote_theme: mmistakes/minimal-mistakes
+titles_from_headings:
+  enabled:     true
+  strip_title: true
 plugins:
-  - jekyll-paginate
-  - jekyll-sitemap
-  - jekyll-gist
-  - jekyll-feed
-  - jemoji
   - jekyll-include-cache
+  - jekyll-titles-from-headings
