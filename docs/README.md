@@ -10,10 +10,10 @@ This repository builds a FreeRADIUS Docker container using Alpine Linux.  It req
 ## Supported tags
 | Tag | Alpine Version | FreeRADIUS Version | Release Date | Changes |
 | --- | :---: | :---: | :---: | :---: |
-| [1.4.3, latest](https://github.com/2stacks/docker-freeradius/blob/master/Dockerfile) | 3.9.4 | 3.0.17-r5 | 2019-06-14 | [Changelog](https://github.com/2stacks/docker-freeradius/compare/v1.4.2...master) |
-| [1.4.2](https://github.com/2stacks/docker-freeradius/blob/master/Dockerfile) | 3.9.3 | 3.0.17-r4 | 2019-04-12 | [Changelog](https://github.com/2stacks/docker-freeradius/compare/v1.4.1...v1.4.2) |
-| [1.4.1](https://github.com/2stacks/docker-freeradius/blob/v1.4.1/Dockerfile) | 3.9.2 | 3.0.17-r4 | 2019-03-19 | [Changelog](https://github.com/2stacks/docker-freeradius/compare/v1.4...v1.4.1)
-| [1.4](https://github.com/2stacks/docker-freeradius/blob/v1.4/Dockerfile) | 3.9.0 | 3.0.17-r4 | 2019-03-07 | [Changelog](https://github.com/2stacks/docker-freeradius/compare/v1.3...v1.4) |
+| [1.5.0, latest](https://github.com/2stacks/docker-freeradius/blob/master/Dockerfile) | 3.10.3 | 3.0.19-r3 | 2019-11-14 | [Changelog](https://github.com/2stacks/docker-freeradius/compare/v1.4.3...master) |
+| [1.4.3](https://github.com/2stacks/docker-freeradius/blob/v1.4.3/Dockerfile) | 3.9.4 | 3.0.17-r5 | 2019-06-14 | [Changelog](https://github.com/2stacks/docker-freeradius/compare/v1.4.2...v1.4.3) |
+| [1.4.2](https://github.com/2stacks/docker-freeradius/blob/v1.4.2/Dockerfile) | 3.9.3 | 3.0.17-r4 | 2019-04-12 | [Changelog](https://github.com/2stacks/docker-freeradius/compare/v1.4.1...v1.4.2) |
+| [1.4.1](https://github.com/2stacks/docker-freeradius/blob/v1.4.1/Dockerfile) | 3.9.2 | 3.0.17-r4 | 2019-03-19 | [Changelog](https://github.com/2stacks/docker-freeradius/compare/v1.4...v1.4.1) |
 
 # Running the container
 -   With MySQL
