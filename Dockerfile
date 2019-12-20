@@ -1,4 +1,4 @@
-FROM alpine:3.10.3
+FROM alpine:3.11.0
 
 MAINTAINER 2stacks <2stacks@2stacks.net>
 
@@ -10,8 +10,8 @@ LABEL net.2stacks.name="2stacks" \
       net.2stacks.description="Dockerfile for autobuilds" \
       net.2stacks.url="http://www.2stacks.net" \
       net.2stacks.vcs-type="Git" \
-      net.2stacks.version="1.5.0" \
-      net.2stacks.radius.version="3.0.19-r3"
+      net.2stacks.version="1.5.1" \
+      net.2stacks.radius.version="3.0.20-r1"
 
 RUN apk --update add freeradius freeradius-mysql freeradius-eap openssl
 
