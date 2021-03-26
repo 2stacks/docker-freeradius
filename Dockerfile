@@ -1,4 +1,4 @@
-FROM alpine:3.13.1
+FROM alpine:3.13.3
 
 MAINTAINER 2stacks <2stacks@2stacks.net>
 
